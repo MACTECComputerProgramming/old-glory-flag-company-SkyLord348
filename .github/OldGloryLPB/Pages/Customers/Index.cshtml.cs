@@ -21,24 +21,12 @@ namespace OldGloryLPB.Pages.Customers
             _context = context;
         }
 
-        public IList<Customer> Customer { get;set; }
-        [BindProperty(SupportsGet = true)]
-        public string SearchString { get; set; }
-        public SelectList Customers { get; set; }
-        [BindProperty(SupportsGet = true)]
-        public string CustomerName { get; set; }
-
 
         public async Task OnGetAsync()
         {
-            var customers = from c in _context.Customer
-                            select c;
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                customers = customers.Where(s => s.Title.Contains(SearchString));
-            }
 
             Customer = await _context.Customer.ToListAsync();
+
         }
     }
 }
